@@ -38,7 +38,7 @@ public class Paciente {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	private void setDni(String dni) {
 		if (dni.compareTo(ER_DNI) != 0 || comprobarLetraDni(dni) == false)
 			throw new IllegalArgumentException("ERROR: DNI no válido.");
 		
