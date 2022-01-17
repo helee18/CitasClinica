@@ -10,6 +10,15 @@ public class Paciente {
 		setTelefono(telefono);
 	}
 	
+	public Paciente (Paciente pacienteOrigen) {
+		if (pacienteOrigen==null)
+			throw new NullPointerException("ERROR: No es posible copiar una posición nula.");
+		
+		setNombre(pacienteOrigen.getNombre());
+		setDni(pacienteOrigen.getDni());
+		setTelefono(pacienteOrigen.getTelefono());
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
