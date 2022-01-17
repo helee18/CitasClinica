@@ -22,6 +22,10 @@ public class Paciente {
 			nombreNuevo = nombreNuevo + " " + palabras[i]; // Juntamos cada palabra separadas por un espacio
 		}
 		
-		return nombre;
+		return nombreNuevo;
+	}
+	
+	private boolean comprobarLetraDni (String dni) {
+		
 	}
 }
