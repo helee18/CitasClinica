@@ -1,8 +1,17 @@
 package org.iesalandalus.programacion.citasclinica;
 
 public class Paciente {
-	private static final String ER_DNI="([0-9]{8})([A-Za-z])", ER_TELEFONO="123456789";
+	private static final String ER_DNI="([0-9]{8})([A-Z])", ER_TELEFONO="[69][0-9]{8}";
 	private String nombre, dni, telefono;
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		
+		this.nombre = formateaNombre(nombre);
+	}
 	
 	private String formateaNombre (String nombre) {
 		
@@ -25,21 +34,43 @@ public class Paciente {
 		return nombreNuevo;
 	}
 	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		if (dni.compareTo(ER_DNI) != 0 || comprobarLetraDni(dni) == false)
+			throw new IllegalArgumentException("ERROR: DNI no válido.");
+		
+		this.dni = dni;
+	}
+	
 	private boolean comprobarLetraDni (String dni) {
 		
 		boolean letraValida = false; // Solo cambiará a true si es valida
 		
 		String[] letras = {"T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"}; // Array con el orden de las letras concreto
 		
-		String letraDNI = dni.substring(8,9); // Sacamos la letra del DNI introducido
+		String letraDni = dni.substring(8,9); // Sacamos la letra del DNI introducido
 		
-		int numeroDNI = Integer.parseInt(dni.substring(0,8)); // Sacamos los numeros del DNI introducido
+		int numeroDni = Integer.parseInt(dni.substring(0,8)); // Sacamos los numeros del DNI introducido
 		
-		int resto = numeroDNI % 23; // Calculamos el resto del numero del DNI introducido
+		int resto = numeroDni % 23; // Calculamos el resto del numero del DNI introducido
 		
-		if (letraDNI.compareTo(letras[resto]) == 0)
+		if (letraDni.compareTo(letras[resto]) == 0)
 				letraValida = true;
 		
 		return letraValida;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		if (telefono.compareTo(ER_TELEFONO) != 0)
+			throw new IllegalArgumentException("ERROR: Telefono no válido.");
+		
+		this.telefono = telefono;
 	}
 }
