@@ -4,6 +4,12 @@ public class Paciente {
 	private static final String ER_DNI="([0-9]{8})([A-Z])", ER_TELEFONO="[69][0-9]{8}";
 	private String nombre, dni, telefono;
 	
+	public Paciente (String nombre, String dni, String telefono) {
+		setNombre(nombre);
+		setDni(dni);
+		setTelefono(telefono);
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
