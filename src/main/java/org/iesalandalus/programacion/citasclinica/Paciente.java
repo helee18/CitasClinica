@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.citasclinica;
 
 public class Paciente {
-	private static final String ER_DNI="12345678Z", ER_TELEFONO="123456789";
+	private static final String ER_DNI="([0-9]{8})([A-Za-z])", ER_TELEFONO="123456789";
 	private String nombre, dni, telefono;
 	
 	private String formateaNombre (String nombre) {
@@ -27,5 +27,19 @@ public class Paciente {
 	
 	private boolean comprobarLetraDni (String dni) {
 		
+		boolean letraValida = false; // Solo cambiará a true si es valida
+		
+		String[] letras = {"T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"}; // Array con el orden de las letras concreto
+		
+		String letraDNI = dni.substring(8,9); // Sacamos la letra del DNI introducido
+		
+		int numeroDNI = Integer.parseInt(dni.substring(0,8)); // Sacamos los numeros del DNI introducido
+		
+		int resto = numeroDNI % 23; // Calculamos el resto del numero del DNI introducido
+		
+		if (letraDNI.compareTo(letras[resto]) == 0)
+				letraValida = true;
+		
+		return letraValida;
 	}
 }
