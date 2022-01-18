@@ -60,7 +60,7 @@ public class Paciente {
 			throw new IllegalArgumentException("ERROR: DNI no válido.");
 		
 		this.dni = dni;
-	}
+	} 
 	
 	private boolean comprobarLetraDni (String dni) {
 		
