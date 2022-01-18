@@ -90,6 +90,18 @@ public class Paciente {
 		
 		this.telefono = telefono;
 	}
+	
+	private String getIniciales () {
+		String iniciales = "";
+		
+		String[] palabras = nombre.split(" "); // Separar nombre por palabras
+
+		for (int i=0; i<=palabras.length-1; i++) { // Recorrer cada palabra
+			iniciales = iniciales + palabras[i].substring(0,1); // Juntamos las iniciales
+		}
+		
+		return iniciales;
+	}
 
 	@Override
 	public int hashCode() {
