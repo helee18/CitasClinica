@@ -14,7 +14,7 @@ public class Paciente {
 	
 	public Paciente (Paciente pacienteOrigen) {
 		if (pacienteOrigen==null)
-			throw new NullPointerException("ERROR: No es posible copiar una posición nula.");
+			throw new NullPointerException("ERROR: No es posible copiar un paciente nulo.");
 		
 		setNombre(pacienteOrigen.getNombre());
 		setDni(pacienteOrigen.getDni());
@@ -26,6 +26,8 @@ public class Paciente {
 	}
 
 	public void setNombre(String nombre) {
+		if (nombre == null)
+			throw new NullPointerException ("ERROR: El nombre de un paciente no puede ser nulo o vacío.");
 		
 		this.nombre = formateaNombre(nombre);
 	}
@@ -56,8 +58,10 @@ public class Paciente {
 	}
 
 	private void setDni(String dni) {
+		if (dni == null)
+			throw new NullPointerException("ERROR: El DNI de un paciente no puede ser nulo o vacío.");
 		if (dni.compareTo(ER_DNI) != 0 || comprobarLetraDni(dni) == false)
-			throw new IllegalArgumentException("ERROR: DNI no válido.");
+			throw new IllegalArgumentException("ERROR_DNI_NO_VALIDO");
 		
 		this.dni = dni;
 	} 
@@ -85,8 +89,10 @@ public class Paciente {
 	}
 
 	public void setTelefono(String telefono) {
+		if (telefono == null)
+			throw new NullPointerException("ERROR: El teléfono de un paciente no puede ser nulo o vacío.");
 		if (telefono.compareTo(ER_TELEFONO) != 0)
-			throw new IllegalArgumentException("ERROR: Telefono no válido.");
+			throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");
 		
 		this.telefono = telefono;
 	}
