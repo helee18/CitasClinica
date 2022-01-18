@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.citasclinica;
 
+import java.util.Objects;
+
 public class Paciente {
 	private static final String ER_DNI="([0-9]{8})([A-Z])", ER_TELEFONO="[69][0-9]{8}";
 	private String nombre, dni, telefono;
@@ -88,4 +90,25 @@ public class Paciente {
 		
 		this.telefono = telefono;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dni, nombre, telefono);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Paciente other = (Paciente) obj;
+		
+		// Comparamos el dni para saber si los objetos son iguales
+		return Objects.equals(dni, other.dni);
+	}
+	
+	
 }
