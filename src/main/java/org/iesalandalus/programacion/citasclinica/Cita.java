@@ -17,5 +17,17 @@ public class Cita {
 		this.fechaHora = fechaHora;
 	}
 	
+	public Paciente getPaciente() {
+		
+		return paciente;
+	}
+
+	private void setPaciente(Paciente paciente) {
+		if (paciente == null) {
+			throw new NullPointerException("ERROR: El paciente de una cita no puede ser nulo.");
+		}
+		
+		this.paciente = new Paciente(paciente);
+	}
 	
 }
