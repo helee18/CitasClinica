@@ -6,6 +6,19 @@ public class Cita {
 	public static final String FORMATO_FECHA_HORA="dd/MM/yyyy HH:mm";
 	private LocalDateTime fechaHora;
 	
+	public Cita(Paciente paciente, LocalDateTime fechaHora) {
+		setFechaHora(fechaHora);
+		setPaciente(paciente);
+	}
+	
+	public Cita(Cita citaOrigen) {
+		if (citaOrigen == null)
+			throw new NullPointerException("ERROR: No se puede copiar una cita nula.");
+			
+		setFechaHora(citaOrigen.getFechaHora());
+		setPaciente(citaOrigen.getPaciente());
+	}
+	
 	public LocalDateTime getFechaHora() {
 		return fechaHora;
 	}
