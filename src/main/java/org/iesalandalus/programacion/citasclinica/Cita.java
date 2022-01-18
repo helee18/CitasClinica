@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.citasclinica;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Cita {
 	public static final String FORMATO_FECHA_HORA="dd/MM/yyyy HH:mm";
@@ -42,5 +43,24 @@ public class Cita {
 		
 		this.paciente = new Paciente(paciente);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(fechaHora);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cita other = (Cita) obj;
+		return Objects.equals(fechaHora, other.fechaHora);
+	}
+	
+	
 	
 }
