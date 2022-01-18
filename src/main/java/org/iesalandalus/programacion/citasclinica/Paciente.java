@@ -130,7 +130,7 @@ public class Paciente {
 
 	@Override
 	public String toString() {
-		return "Paciente [(" + getIniciales() + ")" + "nombre=" + nombre + ", dni=" + dni + ", telefono=" + telefono + "]";
+		return "Paciente [" + "nombre=" + nombre + "(" + getIniciales() + ")" + ", dni=" + dni + ", telefono=" + telefono + "]";
 	}
 	
 	
