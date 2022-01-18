@@ -121,6 +121,12 @@ public class Paciente {
 		// Comparamos el dni para saber si los objetos son iguales
 		return Objects.equals(dni, other.dni);
 	}
+
+	@Override
+	public String toString() {
+		return "Paciente [(" + getIniciales() + ")" + "nombre=" + nombre + ", dni=" + dni + ", telefono=" + telefono + "]";
+	}
+	
 	
 	
 }
