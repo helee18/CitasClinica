@@ -78,6 +78,10 @@ public class Citas {
 	public Cita buscar (Cita cita) {
 		int indice = buscarIndice(cita);
 		
-		
+		// si el indice supera al tamaño, es que no lo ha encontrado y es un objeto nuevo
+		if (!tamanoSuperado(indice))
+			return new Cita(cita);
+		else
+			return null;
 	}
 }
