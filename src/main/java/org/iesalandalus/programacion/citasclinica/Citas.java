@@ -11,5 +11,23 @@ public class Citas {
 		return tamaño;
 	}
 	
+	private boolean capacidadSuperada(int indice) {
+		boolean superada = false;
+		
+		// comprobamos que el indice no supere la capacidad
+		if (indice >= capacidad)
+			superada = true;
+		
+		return superada;
+	}
 	
+	private boolean tamañoSuperado(int indice) {
+		boolean superado = false;
+		
+		// comprobamos que el indice no supere el tamaño
+		if (indice >= tamaño)
+			superado = true;
+		
+		return superado;
+	}
 }
