@@ -84,4 +84,10 @@ public class Citas {
 		else
 			return null;
 	}
+	
+	private void desplazarUnaPosicionHaciaIzquierda (int indice) {
+		for (int i = indice; !tamanoSuperado(i); i++) { // recorrer todos los objetos hacia la derecha a partir del indice hasta legar al final
+			coleccionCitas[i] = coleccionCitas[i+1]; // asignamos en cada posicion el objeto siguiente
+		}
+	}
 }
