@@ -66,22 +66,18 @@ public class Citas {
 		if (capacidadSuperada(indice))
 			throw new OperationNotSupportedException("ERROR: No se aceptan más citas.");
 		
-		// comprobamos que la cita no exista ya, si encuentra 
-		boolean citaEncontrada = false;
-		do {
-			indice++; // recorreremos uno a uno
-			
-			if (coleccionCitas[indice].equals(cita)) // en caso de que el objeto del array que estamos consultado sea la cita introducida
-				citaEncontrada = true; 
-			
-		} while (!citaEncontrada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
-		
-		if (!citaEncontrada)
+		// si el indice supera al tamaño, es que no lo ha encontrado y es un objeto nuevo
+		if (!tamanoSuperado(indice))
 			throw new OperationNotSupportedException("ERROR: Ya existe una cita para esa fecha y hora.");
 		
 		// insertamos la nueva cita y actualizamos el tamaño
 		coleccionCitas[indice] = new Cita(cita);
 		tamano++;
-			
+	}
+	
+	public Cita buscar (Cita cita) {
+		int indice = buscarIndice(cita);
+		
+		
 	}
 }
