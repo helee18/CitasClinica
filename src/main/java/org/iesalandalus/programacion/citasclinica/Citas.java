@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.citasclinica;
 
 public class Citas {
-	private int capacidad, tamaño;
+	private int capacidad, tamano;
 	
 	// Creamos un array con la coleccion de citas
 	Cita[] coleccionCitas;
@@ -10,15 +10,15 @@ public class Citas {
 		return capacidad;
 	}
 
-	public int getTamaño() {
-		return tamaño;
+	public int getTamano() {
+		return tamano;
 	}
 	
 	private boolean capacidadSuperada(int indice) {
 		boolean superada = false;
 		
 		// comprobamos que el indice no supere la capacidad
-		if (indice >= capacidad)
+		if (indice >= (capacidad-1))
 			superada = true;
 		
 		return superada;
@@ -28,7 +28,7 @@ public class Citas {
 		boolean superado = false;
 		
 		// comprobamos que el indice no supere el tamaño
-		if (indice >= tamaño)
+		if (indice >= (tamano-1))
 			superado = true;
 		
 		return superado;
@@ -48,5 +48,20 @@ public class Citas {
 		} while (!citaPasada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
 		
 		return indice;
+	}
+	
+	public Cita insertar (Cita cita) {
+		if (cita == null) 
+		{
+			throw new NullPointerException("ERROR: No se puede insertar una cita nula.");
+		}
+				
+		if (capacidadSuperada(indice))
+			throw new OperationNotSupportedException("ERROR: No se aceptan más citas.");
+		
+		coleccionCitas[tamano-1] = new Cita(cita);
+		tamano++;
+		
+		return coleccionCitas[tamano-1]	;	
 	}
 }
