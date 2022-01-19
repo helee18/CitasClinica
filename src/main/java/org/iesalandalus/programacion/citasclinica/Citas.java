@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.citasclinica;
 
+import java.time.LocalDate;
+
 import javax.naming.OperationNotSupportedException;
 
 public class Citas {
@@ -7,7 +9,24 @@ public class Citas {
 	
 	// Creamos un array con la coleccion de citas
 	Cita[] coleccionCitas;
-
+	
+	public Cita[] getCitas (LocalDate fecha) {
+		if (fecha==null)
+			throw new NullPointerException("ERROR: No se pueden devolver las citas para un día nulo.");
+		
+		// creamos un array para las citas que encontremos en la fecha introducida
+		Cita[] citasFecha = new Cita[tamano];
+		int indice = -1;
+		
+		// recorremos todas las citas comparando
+		for (int i = 0; !tamanoSuperado(i); i++) {
+			if (coleccionCitas[i].getFechaHora().toLocalDate().equals(fecha)) // si ponemos == no se compararia bien
+				citasFecha[indice++] = coleccionCitas[i];
+		}
+		
+		return citasFecha;
+	}
+ 
 	public int getCapacidad() {
 		return capacidad;
 	}
