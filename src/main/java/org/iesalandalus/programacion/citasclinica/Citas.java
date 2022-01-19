@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.citasclinica;
 
+import javax.naming.OperationNotSupportedException;
+
 public class Citas {
 	private int capacidad, tamano;
 	
@@ -37,31 +39,49 @@ public class Citas {
 	private int buscarIndice (Cita cita) {
 		int indice = -1;
 		
-		// consultamos en el array de citas la anterior	
-		boolean citaPasada = false;
+		// consultamos en el array de citas si la encuentra
+		boolean citaEncontrada = false;
 		do {
 			indice++; // recorreremos uno a uno
 			
 			if (coleccionCitas[indice].equals(cita)) // en caso de que el objeto del array que estamos consultado sea la cita introducida
-				citaPasada = true; 
+				citaEncontrada = true; 
 			
-		} while (!citaPasada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
+		} while (!citaEncontrada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
+		
+		if (!citaEncontrada)
+			indice = tamano++;
 		
 		return indice;
 	}
 	
-	public Cita insertar (Cita cita) {
+	public void insertar (Cita cita) throws OperationNotSupportedException {
 		if (cita == null) 
 		{
 			throw new NullPointerException("ERROR: No se puede insertar una cita nula.");
 		}
-				
+		
+		int indice = buscarIndice(cita);
+		
 		if (capacidadSuperada(indice))
 			throw new OperationNotSupportedException("ERROR: No se aceptan más citas.");
 		
-		coleccionCitas[tamano-1] = new Cita(cita);
-		tamano++;
+		// comprobamos que la cita no exista ya, si encuentra 
+		boolean citaEncontrada = false;
+		do {
+			indice++; // recorreremos uno a uno
+			
+			if (coleccionCitas[indice].equals(cita)) // en caso de que el objeto del array que estamos consultado sea la cita introducida
+				citaEncontrada = true; 
+			
+		} while (!citaEncontrada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
 		
-		return coleccionCitas[tamano-1]	;	
+		if (!citaEncontrada)
+			throw new OperationNotSupportedException("ERROR: Ya existe una cita para esa fecha y hora.");
+		
+		// insertamos la nueva cita y actualizamos el tamaño
+		coleccionCitas[indice] = new Cita(cita);
+		tamano++;
+			
 	}
 }
