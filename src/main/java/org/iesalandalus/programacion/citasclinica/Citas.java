@@ -90,4 +90,22 @@ public class Citas {
 			coleccionCitas[i] = coleccionCitas[i+1]; // asignamos en cada posicion el objeto siguiente
 		}
 	}
+	
+	public void borrar (Cita cita) throws OperationNotSupportedException {
+		if (cita == null) 
+		{
+			throw new NullPointerException("ERROR: No se puede insertar una cita nula.");
+		}
+		
+		// si no encuentra la cita salta error
+		if (buscar(cita) == null)
+			throw new OperationNotSupportedException("ERROR: No existe ninguna cita para esa fecha y hora.");
+		
+		// borrar cita
+		int indice = buscarIndice(cita); // buscamos indice de cita a borrar
+		
+		coleccionCitas[indice] = null; // asignamos un elemento vacio en esa posicion
+		
+		desplazarUnaPosicionHaciaIzquierda(indice); // movemos todo para no dejar huecos en medio
+	}
 }
