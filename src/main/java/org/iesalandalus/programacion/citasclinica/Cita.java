@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Cita {
 	public static final String FORMATO_FECHA_HORA="dd/MM/yyyy HH:mm";
 	private LocalDateTime fechaHora;
+	public Paciente paciente; // estara mal SEGURO
 	
 	public Cita(Paciente paciente, LocalDateTime fechaHora) {
 		setFechaHora(fechaHora);
@@ -38,11 +39,13 @@ public class Cita {
 	}
 
 	private void setPaciente(Paciente paciente) {
+		
 		if (paciente == null) {
 			throw new NullPointerException("ERROR: El paciente de una cita no puede ser nulo.");
 		}
 		
 		this.paciente = new Paciente(paciente);
+		
 	}
 
 	@Override
