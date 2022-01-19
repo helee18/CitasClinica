@@ -23,6 +23,9 @@ public class Citas {
 		tamano = 0;
 	}
 	
+	public Cita[] getCitas() {
+		return coleccionCitas;
+	}
 	
 	public Cita[] getCitas (LocalDate fecha) {
 		if (fecha==null)
