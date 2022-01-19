@@ -2,6 +2,9 @@ package org.iesalandalus.programacion.citasclinica;
 
 public class Citas {
 	private int capacidad, tamaño;
+	
+	// Creamos un array con la coleccion de citas
+	Cita[] coleccionCitas;
 
 	public int getCapacidad() {
 		return capacidad;
@@ -21,7 +24,7 @@ public class Citas {
 		return superada;
 	}
 	
-	private boolean tamañoSuperado(int indice) {
+	private boolean tamanoSuperado(int indice) {
 		boolean superado = false;
 		
 		// comprobamos que el indice no supere el tamaño
@@ -29,5 +32,21 @@ public class Citas {
 			superado = true;
 		
 		return superado;
+	}
+	
+	private int buscarIndice (Cita cita) {
+		int indice = -1;
+		
+		// consultamos en el array de citas la anterior	
+		boolean citaPasada = false;
+		do {
+			indice++; // recorreremos uno a uno
+			
+			if (coleccionCitas[indice].equals(cita)) // en caso de que el objeto del array que estamos consultado sea la cita introducida
+				citaPasada = true; 
+			
+		} while (!citaPasada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
+		
+		return indice;
 	}
 }
