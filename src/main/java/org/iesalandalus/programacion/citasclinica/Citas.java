@@ -7,8 +7,22 @@ import javax.naming.OperationNotSupportedException;
 public class Citas {
 	private int capacidad, tamano;
 	
-	// Creamos un array con la coleccion de citas
+	// Declaramos un array con la coleccion de citas
 	Cita[] coleccionCitas;
+	
+	// constructor
+	public Citas (int capacidadColeccionCitas) {
+		if (capacidadColeccionCitas <= 0)
+			throw new NullPointerException("ERROR: La capacidad debe ser mayor que cero.");
+		
+		// Creamos el array con la capacidad introducida
+		coleccionCitas = new Cita[capacidadColeccionCitas];
+		
+		// Actualizamos los atributos capacidad y tamaño
+		capacidad = capacidadColeccionCitas;
+		tamano = 0;
+	}
+	
 	
 	public Cita[] getCitas (LocalDate fecha) {
 		if (fecha==null)
@@ -126,5 +140,8 @@ public class Citas {
 		coleccionCitas[indice] = null; // asignamos un elemento vacio en esa posicion
 		
 		desplazarUnaPosicionHaciaIzquierda(indice); // movemos todo para no dejar huecos en medio
+		
+		// actualizamos tamaño
+		tamano--;
 	}
 }
