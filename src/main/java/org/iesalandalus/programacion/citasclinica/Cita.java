@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Cita {
 	public static final String FORMATO_FECHA_HORA="dd/MM/yyyy HH:mm";
 	private LocalDateTime fechaHora;
-	public Paciente paciente; // estara mal SEGURO
+	public Paciente paciente; // ??
 	
 	public Cita(Paciente paciente, LocalDateTime fechaHora) {
 		setFechaHora(fechaHora);
