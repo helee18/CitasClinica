@@ -1,5 +1,9 @@
 package org.iesalandalus.programacion.citasclinica.vista;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.citasclinica.modelo.Paciente;
@@ -52,6 +56,31 @@ public class Consola {
 		paciente = new Paciente(nombre, dni, telefono);
 		
 		return paciente;
+	}
+	
+	public static LocalDateTime leerFechaHora() 
+	{
+		// definimos el patron que debe seguir la fechahora
+		String patron = "dd/MM/yyyy HH:mm";
+		LocalDateTime fechaHora = null;
+		
+		boolean fechaValida = false;
+		do 
+		{
+			try // probamos a pedir la fecha hora y solo si no salta error seguimos sin repetir la pregunta
+			{
+				System.out.println("Introduzca una fecha y hora con el siguiente formato: dd/MM/aaaa HH:mm:");
+				fechaHora = LocalDateTime.parse(Entrada.cadena(), DateTimeFormatter.ofPattern(patron));
+				
+				fechaValida = true;
+				
+			} catch (DateTimeParseException e) {
+				fechaValida = false;
+			}
+			
+		} while (!fechaValida);
+		
+		return fechaHora;
 	}
 	
 }
