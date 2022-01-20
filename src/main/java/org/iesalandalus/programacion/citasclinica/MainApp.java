@@ -79,4 +79,15 @@ public class MainApp {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	private void mostrarCitas () {
+		try {
+			Cita[] citasMostrar = citas.getCitas();
+			
+			System.out.println(citasMostrar);
+			
+		} catch (IllegalArgumentException | NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
