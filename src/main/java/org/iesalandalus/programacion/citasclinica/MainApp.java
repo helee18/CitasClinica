@@ -16,21 +16,25 @@ public class MainApp {
 	
 	public static final int NUM_MAX_CITAS = 10;
 	Citas citas = new Citas(NUM_MAX_CITAS); ///////////////////CONSTRUCTOR//
+	
+	public MainApp () {
+		
+	}
 
 	public static void main(String[] args) {
-		int opcion=0;
+		Opciones opcion;
 		
 		do {
 			System.out.println("Programa para gestionar las citas de la Clínica.");
 			Consola.mostrarMenu();
 			
-			//opcion = elegirOpcion();
-			//ejecutarOpcion(opcion);
+			opcion = Consola.elegirOpcion();
+			ejecutarOpcion(opcion);
 			
-		} while (opcion != 0);
+		} while (opcion != Opciones.SALIR);
 	}
 	
-	public void ejecutarOpcion (Opciones opcion) {
+	public static void ejecutarOpcion (Opciones opcion) {
 		switch (opcion) {
 		case INSERTAR_CITA:
 			insertarCita();
@@ -54,7 +58,7 @@ public class MainApp {
 		}
 	}
 	
-	private void insertarCita () {
+	private static void insertarCita () {
 		try {
 			// creamos una cita
 			Cita cita = Consola.leerCita();
@@ -69,7 +73,7 @@ public class MainApp {
 		}
 	}
 	
-	private void buscarCita () {
+	private static void buscarCita () {
 		try {
 			
 			LocalDateTime fechaHora = Consola.leerFechaHora(); // pedimos fecha
@@ -89,7 +93,7 @@ public class MainApp {
 		}
 	}
 	
-	private void borrarCita() {
+	private static void borrarCita() {
 		try {
 			LocalDateTime fechaHora = Consola.leerFechaHora(); // pedimos fecha
 			Paciente paciente = new Paciente("x", "12345678Z", "677777777"); // creamos un paciente cualquiera
@@ -105,7 +109,7 @@ public class MainApp {
 		}
 	}
 	
-	private void mostrarCitas () {
+	private static void mostrarCitas () {
 		try {
 			Cita[] citasMostrar = citas.getCitas();
 			
@@ -116,7 +120,7 @@ public class MainApp {
 		}
 	}
 	
-	private void mostrarCitasDia () {
+	private static void mostrarCitasDia () {
 		try {
 			LocalDate fecha = Consola.leerFecha();
 			Cita[] citasMostrar = citas.getCitas(fecha);
