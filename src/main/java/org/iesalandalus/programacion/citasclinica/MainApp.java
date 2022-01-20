@@ -8,6 +8,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.citasclinica.modelo.Cita;
 import org.iesalandalus.programacion.citasclinica.modelo.Citas;
+import org.iesalandalus.programacion.citasclinica.modelo.Paciente;
 import org.iesalandalus.programacion.citasclinica.vista.Consola;
 
 public class MainApp {
@@ -45,18 +46,37 @@ public class MainApp {
 	
 	private void buscarCita () {
 		try {
-			// pedimos al fecha y hora
-			LocalDateTime fechaHora = Consola.leerFechaHora();
-			// lo convertimos en fecha (asi lo pide el metodo getcitas
-			LocalDate fecha = fechaHora.toLocalDate();
-			// buscamos las citas en esa fecha
-			Cita[] cita = citas.getCitas(fecha);
 			
-			System.out.println(cita);
+			LocalDateTime fechaHora = Consola.leerFechaHora(); // pedimos fecha
+			Paciente paciente = new Paciente("x", "12345678Z", "677777777"); // creamos un paciente cualquiera
+			Cita cita = new Cita (paciente, fechaHora); // creamos una cita
+			
+			// buscamos la cita
+			Cita citaBuscada = citas.buscar(cita);
+			
+			if (citaBuscada == null)
+				System.out.println(" No existe la cita ");
+			else 
+				System.out.println(citaBuscada);
 			
 		} catch (IllegalArgumentException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
-		
+	}
+	
+	private void borrarCita() {
+		try {
+			LocalDateTime fechaHora = Consola.leerFechaHora(); // pedimos fecha
+			Paciente paciente = new Paciente("x", "12345678Z", "677777777"); // creamos un paciente cualquiera
+			Cita cita = new Cita (paciente, fechaHora); // creamos una cita
+			
+			// buscamos la cita
+			citas.borrar(cita);
+			
+			System.out.println(" Se ha borrado la cita ");
+			
+		} catch (IllegalArgumentException | OperationNotSupportedException | NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
