@@ -67,10 +67,8 @@ public class Consola {
 		LocalDateTime fechaHora = null;
 		
 		boolean fechaValida = false;
-		do 
-		{
-			try // probamos a pedir la fecha hora y solo si no salta error seguimos sin repetir la pregunta
-			{
+		do{
+			try { // probamos a pedir la fecha hora y solo si no salta error seguimos sin repetir la pregunta // se puede try aqui?
 				System.out.println("Introduzca una fecha y hora con el formato dd/MM/aaaa HH:mm ");
 				fechaHora = LocalDateTime.parse(Entrada.cadena(), DateTimeFormatter.ofPattern(patron));
 				
@@ -96,10 +94,8 @@ public class Consola {
 		LocalDate fecha = null;
 		boolean fechaValida = false;
 		
-		do
-		{
-			try 
-			{
+		do {
+			try {
 				System.out.println("Introduzca una fecha con el formato dd/MM/aaaa ");
 				fecha = LocalDate.parse(Entrada.cadena(), DateTimeFormatter.ofPattern(formatoCadena));
 				fechaValida = true;
