@@ -15,7 +15,7 @@ import org.iesalandalus.programacion.citasclinica.vista.Opciones;
 public class MainApp {
 	
 	public static final int NUM_MAX_CITAS = 10;
-	Citas citas = new Citas(NUM_MAX_CITAS); ///////////////////CONSTRUCTOR//
+	Citas citas = new Citas(NUM_MAX_CITAS);
 	
 	public MainApp () {
 		
