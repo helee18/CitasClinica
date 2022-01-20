@@ -1,5 +1,9 @@
 package org.iesalandalus.programacion.citasclinica;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.citasclinica.modelo.Cita;
@@ -9,7 +13,7 @@ import org.iesalandalus.programacion.citasclinica.vista.Consola;
 public class MainApp {
 	
 	public static final int NUM_MAX_CITAS = 10;
-	private static Citas listaCitas = new Citas(NUM_MAX_CITAS);
+	Citas citas = new Citas(NUM_MAX_CITAS); ///////////////////CONSTRUCTOR//
 
 	public static void main(String[] args) {
 		int opcion=0;
@@ -29,15 +33,30 @@ public class MainApp {
 			// creamos una cita
 			Cita cita = Consola.leerCita();
 			
-			// la añadimos al array de citas
-			Citas citas = new Citas(NUM_MAX_CITAS);
+			// añadimos la cita al array de citas
 			citas.insertar(cita);
 			
-			System.out.println(" Cita asignada correctamente.");
+			System.out.println(" Cita asignada ");
 			
 		} catch (IllegalArgumentException | OperationNotSupportedException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
+	private void buscarCita () {
+		try {
+			// pedimos al fecha y hora
+			LocalDateTime fechaHora = Consola.leerFechaHora();
+			// lo convertimos en fecha (asi lo pide el metodo getcitas
+			LocalDate fecha = fechaHora.toLocalDate();
+			// buscamos las citas en esa fecha
+			Cita[] cita = citas.getCitas(fecha);
+			
+			System.out.println(cita);
+			
+		} catch (IllegalArgumentException | NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
 }
