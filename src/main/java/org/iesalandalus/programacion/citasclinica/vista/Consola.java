@@ -1,11 +1,13 @@
 package org.iesalandalus.programacion.citasclinica.vista;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.citasclinica.modelo.Cita;
 import org.iesalandalus.programacion.citasclinica.modelo.Paciente;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
@@ -33,7 +35,7 @@ public class Consola {
 		
 		do {
 			
-			System.out.println("Seleccione una opción entre 0 y 5:");
+			System.out.println("Seleccione una opción entre 0-5 ");
 			opcionElegida = Entrada.entero();
 			
 		} while (opcionElegida < 0 || opcionElegida > 5) ;
@@ -44,10 +46,10 @@ public class Consola {
 	public static Paciente leerPaciente() throws OperationNotSupportedException {
 		Paciente paciente;
 		
-		System.out.println("Introduzca el nombre:");
+		System.out.println("Introduzca el nombre ");
 		String nombre = Entrada.cadena();
 		
-		System.out.println("Introduzca el teléfono:");
+		System.out.println("Introduzca el teléfono ");
 		String telefono = Entrada.cadena();
 		
 		System.out.println("Introduzca el DNI:");
@@ -69,7 +71,7 @@ public class Consola {
 		{
 			try // probamos a pedir la fecha hora y solo si no salta error seguimos sin repetir la pregunta
 			{
-				System.out.println("Introduzca una fecha y hora con el siguiente formato: dd/MM/aaaa HH:mm:");
+				System.out.println("Introduzca una fecha y hora con el formato dd/MM/aaaa HH:mm ");
 				fechaHora = LocalDateTime.parse(Entrada.cadena(), DateTimeFormatter.ofPattern(patron));
 				
 				fechaValida = true;
@@ -83,4 +85,30 @@ public class Consola {
 		return fechaHora;
 	}
 	
+	public static Cita leerCita() throws OperationNotSupportedException {
+		Cita cita = new Cita(leerPaciente(), leerFechaHora());
+		
+		return cita;
+	}
+	
+	public static LocalDate leerFecha() {
+		String formatoCadena = "dd/MM/yyyy";
+		LocalDate fecha = null;
+		boolean fechaValida = false;
+		
+		do
+		{
+			try 
+			{
+				System.out.println("Introduzca una fecha con el formato dd/MM/aaaa ");
+				fecha = LocalDate.parse(Entrada.cadena(), DateTimeFormatter.ofPattern(formatoCadena));
+				fechaValida = true;
+				
+			} catch (DateTimeParseException e) {
+				fechaValida = false;
+			}
+		} while (!fechaValida);
+		
+		return fecha;
+	}
 }
