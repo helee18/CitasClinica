@@ -10,6 +10,7 @@ import org.iesalandalus.programacion.citasclinica.modelo.Cita;
 import org.iesalandalus.programacion.citasclinica.modelo.Citas;
 import org.iesalandalus.programacion.citasclinica.modelo.Paciente;
 import org.iesalandalus.programacion.citasclinica.vista.Consola;
+import org.iesalandalus.programacion.citasclinica.vista.Opciones;
 
 public class MainApp {
 	
@@ -26,7 +27,31 @@ public class MainApp {
 			//opcion = elegirOpcion();
 			//ejecutarOpcion(opcion);
 			
-		} while (opcion >= 0 && opcion >= 5);
+		} while (opcion != 0);
+	}
+	
+	public void ejecutarOpcion (Opciones opcion) {
+		switch (opcion) {
+		case INSERTAR_CITA:
+			insertarCita();
+			break;
+		case BUSCAR_CITA:
+			buscarCita();
+			break;
+		case BORRAR_CITA:
+			borrarCita();
+			break;
+		case MOSTRAR_CITAS_DIA:
+			mostrarCitasDia();
+			break;
+		case MOSTRAR_CITAS:
+			mostrarCitas();
+			break;
+		case SALIR:
+			System.out.println("");
+			System.out.print("¡Sesión terminada!");
+			break;
+		}
 	}
 	
 	private void insertarCita () {
@@ -91,7 +116,7 @@ public class MainApp {
 		}
 	}
 	
-	private void mostrarCitasFecha () {
+	private void mostrarCitasDia () {
 		try {
 			LocalDate fecha = Consola.leerFecha();
 			Cita[] citasMostrar = citas.getCitas(fecha);
