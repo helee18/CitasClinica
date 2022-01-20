@@ -90,4 +90,16 @@ public class MainApp {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	private void mostrarCitasFecha () {
+		try {
+			LocalDate fecha = Consola.leerFecha();
+			Cita[] citasMostrar = citas.getCitas(fecha);
+			
+			System.out.println(citasMostrar);
+			
+		} catch (IllegalArgumentException | NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
