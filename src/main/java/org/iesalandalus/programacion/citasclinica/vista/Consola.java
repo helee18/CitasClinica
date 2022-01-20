@@ -57,7 +57,7 @@ public class Consola {
 		
 		paciente = new Paciente(nombre, dni, telefono);
 		
-		return paciente;
+		return new Paciente(paciente);
 	}
 	
 	public static LocalDateTime leerFechaHora() 
@@ -86,7 +86,7 @@ public class Consola {
 	public static Cita leerCita() throws OperationNotSupportedException {
 		Cita cita = new Cita(leerPaciente(), leerFechaHora());
 		
-		return cita;
+		return new Cita(cita);
 	}
 	
 	public static LocalDate leerFecha() {
