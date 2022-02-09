@@ -40,7 +40,7 @@ public class Consola {
 			
 		} while (opcionElegida < 0 || opcionElegida > 5) ;
 
-		return opcion[opcionElegida];
+		return opcion[opcionElegida]; //Opciones.values()[opcion]
 	}
 	
 	public static Paciente leerPaciente() throws OperationNotSupportedException {
@@ -54,6 +54,8 @@ public class Consola {
 		
 		System.out.println("Introduzca el DNI:");
 		String dni = Entrada.cadena();
+		
+		//try nullpointerexception o illegal (o aqui o en el main)
 		
 		paciente = new Paciente(nombre, dni, telefono);
 		

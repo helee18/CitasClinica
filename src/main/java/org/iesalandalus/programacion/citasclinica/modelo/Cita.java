@@ -28,7 +28,7 @@ public class Cita {
 	
 	public void setFechaHora(LocalDateTime fechaHora) {
 		if (fechaHora == null)
-			throw new NullPointerException("ERROR: La fecha es nula.");
+			throw new NullPointerException("ERROR: La fecha y hora de una cita no puede ser nula.");
 		
 		this.fechaHora = fechaHora;
 	}
@@ -62,12 +62,14 @@ public class Cita {
 		if (getClass() != obj.getClass())
 			return false;
 		Cita other = (Cita) obj;
+		//if fecha hora ==
 		return Objects.equals(fechaHora, other.fechaHora);
 	}
 
 	@Override
 	public String toString() {
-		return getPaciente() + "fechaHora=" + fechaHora.format(DateTimeFormatter.ofPattern(FORMATO_FECHA_HORA));
+		//"%s, fechaHora=%s", paciente1, fechaHora1.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"
+		return getPaciente() + ", fechaHora=" + fechaHora.format(DateTimeFormatter.ofPattern(FORMATO_FECHA_HORA));
 	}
 	
 	

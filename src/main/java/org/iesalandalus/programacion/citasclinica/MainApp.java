@@ -2,7 +2,6 @@ package org.iesalandalus.programacion.citasclinica;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -16,10 +15,6 @@ public class MainApp {
 	
 	public static final int NUM_MAX_CITAS = 10;
 	static Citas citas = new Citas(NUM_MAX_CITAS);
-	
-	public MainApp () {
-		
-	}
 
 	public static void main(String[] args) {
 		Opciones opcion;

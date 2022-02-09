@@ -13,7 +13,7 @@ public class Citas {
 	// constructor
 	public Citas (int capacidadColeccionCitas) {
 		if (capacidadColeccionCitas <= 0)
-			throw new NullPointerException("ERROR: La capacidad debe ser mayor que cero.");
+			throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
 		
 		// Creamos el array con la capacidad introducida
 		coleccionCitas = new Cita[capacidadColeccionCitas];
@@ -24,6 +24,7 @@ public class Citas {
 	}
 	
 	public Cita[] getCitas() {
+		//hacer copia profunda del array
 		return coleccionCitas;
 	}
 	
@@ -32,7 +33,7 @@ public class Citas {
 			throw new NullPointerException("ERROR: No se pueden devolver las citas para un día nulo.");
 		
 		// creamos un array para las citas que encontremos en la fecha introducida
-		Cita[] citasFecha = new Cita[tamano];
+		Cita[] citasFecha = new Cita[tamano]; //copia profunda [capacidad, no tamano]
 		int indice = -1;
 		
 		// recorremos todas las citas comparando
@@ -73,29 +74,28 @@ public class Citas {
 	}
 	
 	private int buscarIndice (Cita cita) {
-		int indice = -1;
-		
-		// consultamos en el array de citas si la encuentra
+		int indice = 0;
 		boolean citaEncontrada = false;
-		do {
-			indice++; // recorreremos uno a uno
-			
-			if (coleccionCitas[indice].equals(cita)) // en caso de que el objeto del array que estamos consultado sea la cita introducida
-				citaEncontrada = true; 
-			
-		} while (!citaEncontrada && !tamanoSuperado(indice)); // salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
-		
-		if (!citaEncontrada)
-			indice = tamano++;
-		
+		while (!tamanoSuperado(indice) && !citaEncontrada)// salimos si encuentra la cida que hemos buscado o llegamos al ultimo objeto del array y no la encuentra
+		{
+			if (coleccionCitas[indice].equals(cita))// en caso de que el objeto del array que estamos consultado sea la cita introducida
+			{
+				citaEncontrada = true;
+			} 
+			else 
+			{
+				indice++;
+			}
+		}
 		return indice;
 	}
 	
 	public void insertar (Cita cita) throws OperationNotSupportedException {
 		if (cita == null) 
-		{
 			throw new NullPointerException("ERROR: No se puede insertar una cita nula.");
-		}
+		
+		if (buscar(cita) == null)
+			throw new OperationNotSupportedException("ERROR: Ya existe una cita para esa fecha y hora.");
 		
 		int indice = buscarIndice(cita);
 		
@@ -112,11 +112,14 @@ public class Citas {
 	}
 	
 	public Cita buscar (Cita cita) {
+		if (cita == null)
+			throw new NullPointerException("ERROR: No existe ninguna cita para esa fecha y hora.");
+		
 		int indice = buscarIndice(cita);
 		
 		// si el indice supera al tamaño, es que no lo ha encontrado y es un objeto nuevo
 		if (!tamanoSuperado(indice))
-			return new Cita(cita);
+			return new Cita(cita); //new Citas(coleccionCitas[indice])
 		else
 			return null;
 	}
@@ -129,9 +132,7 @@ public class Citas {
 	
 	public void borrar (Cita cita) throws OperationNotSupportedException {
 		if (cita == null) 
-		{
-			throw new NullPointerException("ERROR: No se puede insertar una cita nula.");
-		}
+			throw new IllegalArgumentException("ERROR: No se puede borrar una cita nula.");
 		
 		// si no encuentra la cita salta error
 		if (buscar(cita) == null)

@@ -22,25 +22,36 @@ public class Paciente {
 	}
 	
 	public String getNombre() {
-		return nombre;
+		return formateaNombre(nombre).trim();
 	}
 
 	public void setNombre(String nombre) {
 		if (nombre == null)
 			throw new NullPointerException ("ERROR: El nombre de un paciente no puede ser nulo o vacío.");
 		
+		//trim isempty
+		if (nombre == null || nombre.trim().isEmpty())
+			throw new NullPointerException("ERROR: El nombre de un paciente no puede ser nulo o vacío.");
+		
 		this.nombre = formateaNombre(nombre);
 	}
 	
 	private String formateaNombre (String nombre) {
+		//EN ESTE ORDEN
+		//nullpointerexception
+		//nombre.trim().isempty() - illegalargumentexception
+		if (nombre == null || nombre.trim().isEmpty())
+			throw new NullPointerException("ERROR: El nombre de un paciente no puede ser nulo o vacío.");
 		
 		// Borrar espacios, tabulaciones y retornos al principio y al final
 		nombre = nombre.replaceAll("^\\s*","");
 		nombre = nombre.replaceAll("\\s*$","");
 		
 		// Borrar espacios de sobra en medio
-		nombre = nombre.replaceAll("\\s{2,}"," ");
+		nombre = nombre.trim().replaceAll("\\s{2,}"," ");
 		
+		//charat(0) para substring(0,1)
+ 		
 		// Mayusculas y minusculas
 		String nombreNuevo = "";
 		String[] palabras = nombre.split(" "); // Separar nombre por palabras
@@ -58,15 +69,25 @@ public class Paciente {
 	}
 
 	private void setDni(String dni) {
-		if (dni == null)
+		if (dni == null || dni.trim().isEmpty())
 			throw new NullPointerException("ERROR: El DNI de un paciente no puede ser nulo o vacío.");
-		if (dni.compareTo(ER_DNI) != 0 || comprobarLetraDni(dni) == false)
-			throw new IllegalArgumentException("ERROR_DNI_NO_VALIDO");
+		
+		//!dni.matcher(ER_DNI)
+		if (!dni.matches(ER_DNI))
+			throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");
+		
+		if (!comprobarLetraDni(dni))
+			throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");
 		
 		this.dni = dni;
 	} 
 	
 	private boolean comprobarLetraDni (String dni) {
+		//null y empty
+		if (dni == null || dni.trim().isEmpty())
+			throw new NullPointerException("ERROR: El DNI de un paciente no puede ser nulo o vacío.");
+		
+		//pattern and matcher
 		
 		boolean letraValida = false; // Solo cambiará a true si es valida
 		
@@ -89,9 +110,12 @@ public class Paciente {
 	}
 
 	public void setTelefono(String telefono) {
-		if (telefono == null)
+		if (telefono == null || telefono.trim().isEmpty())
 			throw new NullPointerException("ERROR: El teléfono de un paciente no puede ser nulo o vacío.");
-		if (telefono.compareTo(ER_TELEFONO) != 0)
+		
+		//ismepty
+		//!matcher
+		if (!telefono.matches(ER_TELEFONO) )
 			throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");
 		
 		this.telefono = telefono;
@@ -100,10 +124,10 @@ public class Paciente {
 	private String getIniciales () {
 		String iniciales = "";
 		
-		String[] palabras = nombre.split(" "); // Separar nombre por palabras
+		String[] palabras = getNombre().split(" "); // Separar nombre por palabras
 
 		for (int i=0; i<=palabras.length-1; i++) { // Recorrer cada palabra
-			iniciales = iniciales + palabras[i].substring(0,1); // Juntamos las iniciales
+			iniciales = iniciales + palabras[i].charAt(0); // Juntamos las iniciales
 		}
 		
 		return iniciales;
@@ -124,13 +148,16 @@ public class Paciente {
 			return false;
 		Paciente other = (Paciente) obj;
 		
+		//if dni ==
+		
 		// Comparamos el dni para saber si los objetos son iguales
 		return Objects.equals(dni, other.dni);
 	}
 
 	@Override
 	public String toString() {
-		return "Paciente [" + "nombre=" + nombre + "(" + getIniciales() + ")" + ", dni=" + dni + ", telefono=" + telefono + "]";
+		//return String.format("nombre=%s (%s), DNI=%s, teléfono=%s", nombre, getIniciales(), dni, telefono);
+		return "nombre=" + getNombre() + " (" + getIniciales() + ")" + ", DNI=" + getDni() + ", teléfono=" + getTelefono();
 	}
 	
 	
