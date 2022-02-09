@@ -27,7 +27,7 @@ public class MainApp {
 			ejecutarOpcion(opcion);
 			
 		} while (opcion != Opciones.SALIR);
-	}
+	} 
 	
 	public static void ejecutarOpcion (Opciones opcion) {
 		switch (opcion) {
